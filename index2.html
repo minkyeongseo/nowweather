@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
+    <style>
+
+    @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    }
+    
+    *{
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        list-style: none;
+        box-sizing: border-box;
+        position: relative;
+
+    }
+
+    html{
+        font-size: 19px;
+        font-family: 'Days One', sans-serif, 'Pretendard-Regular';
+        font-weight: 400;
+        background-color: --background;
+
+        @media screen and (max-width: 1179px){
+        font-size: calc(12px + 1.2vw);
+    }
+    @media screen and (min-width: 980px) and (max-width: 1179px){
+        font-size: calc(12px + 1.4vw);
+    }
+    @media screen and (max-width: 768px){
+        font-size: calc(12px + 0.8vw);
+    }
+    @media screen and (max-width: 420px){
+        font-size: calc(12px + 0.2vw);
+    }
+    }
+
+    :root{
+    --color:#000;
+    --background: #fff;
+	}
+
+	.inform, .contents{
+        position: fixed;
+        width: 100%;
+        padding: 0 0.9375rem;
+    }
+
+    .inform{
+        bottom: 3%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 3rem;
+        color: var(--color);
+
+    
+    h1{
+        font-family: 'Pretendard-Regular';
+        line-height: 1;
+        color: var(--color);
+    }
+    
+    h2{
+        font-family: 'Days One', sans-serif;
+        line-height: 1.1em;
+        color: var(--color);
+        font-size: 4.625rem;
+        margin-top: -0.2em;
+    }}
+
+	.contents{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    bottom: 0%;
+    margin-bottom: -0.2em;
+    color: var(--color);
+    
+    >div{
+            background-color: #ffffff00;
+            color: var(--color);
+            font-family: 'Pretendard-Regular';
+            width: 15vw;
+            height: 15vw;
+            max-width: 188px;
+            max-height: 110px;
+           
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+
+            line-height: 1.25em;
+            letter-spacing: -0.08em;
+
+            
+            span{
+                position: relative;
+                left: -0.04em;
+            }
+        }
+    }
+
+    .container {
+        bottom: 46%;
+        left: 0;
+        align-items: center;
+        position: fixed;
+        margin-left: 280px; 
+        display: flex;
+  justify-content: center;
+}
+  
+.box {
+  width: 300px;
+  height: 300px;
+  background-color: #ccc;
+  border-radius: 10%;
+  margin: 0 5px;
+  transition: background-image 0.3s ease-in-out;
+  position: relative;
+  background-size: cover; 
+  background-position: center;
+}
+
+.box:nth-child(1) {
+      background-image: url('min10.jpg'); 
+    }
+
+    .box:nth-child(2) {
+      background-image: url('min9.jpg'); 
+    }
+
+    .box:nth-child(3) {
+      background-image: url('0.jpg'); 
+    }
+
+    .box:nth-child(4) {
+      background-image: url('10.jpg');
+    }
+
+   /* 박스 한개에 마우스호버했을 때 나머지 박스들 흐리게 보이기 */
+    .container:hover .box:not(:hover) {
+      opacity: 0.2;
+    }
+
+    /* 박스에 마우스오버하면 */
+    .box:hover::before {
+      content: "";
+      background-image: var(--hover-image); 
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 10%;
+      z-index: 1;
+      transition: opacity 0.3s ease-in-out; 
+      opacity: 0; 
+      background-size: cover;
+  background-position: center;
+    }
+
+       /* 마우스오버하면 이미지 보이게 */
+       .box:nth-child(1):hover::before {
+      --hover-image: url('hover-image1.jpg'); 
+      opacity: 1; /* Show on hover */
+    }
+
+    .box:nth-child(2):hover::before {
+      --hover-image: url('hover-image2.jpg'); 
+      opacity: 1; /* Show on hover */
+    }
+
+    .box:nth-child(3):hover::before {
+      --hover-image: url('hover-image3.jpg'); 
+      opacity: 1; /* Show on hover */
+    }
+
+    .box:nth-child(4):hover::before {
+      --hover-image: url('hover-image4.jpg'); 
+      opacity: 1; /* Show on hover */
+    }
+
+
+	#header {
+    display: fixed;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #fff;
+  color: #000; 
+  color: var(--color);
+  text-align: center;
+  line-height: 65px;
+  cursor: pointer;
+  transition: height 0.5s ease;
+  z-index: 9999; 
+  font-size: 22px; 
+  font-weight: bold;
+}
+
+    /* 헤더가 펼쳐졌을 때의 스타일 */
+    #header.expanded {
+      height: 100vh; 
+      line-height: 1.5; /* 텍스트가 세로 중앙에 오도록 line-height 조정 */
+      background-color: var(--background);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard-Regular';
+      height: 200vh; 
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.2;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    #blink-text {
+      animation: blink 1.3s infinite; /* 깜빡깜빡 애니메이션 */
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard-Regular';
+      height: 200vh; 
+    }
+    
+
+    </style>
+	<title>today's clothes</title>
+
+</head>
+<body>
+	<div id="header">
+        <span id="blink-text">**지금 날씨 확인하러 돌아가기**</span>
+    </div>
+
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+    
+    
+
+	<section class="contents">
+        <div>
+            <p class="latitude">37°38'07.8"N</p>
+            <p class="longitude">127°04'43.60"E</p>
+        </div>
+        
+        <div>
+            <p class="location">Nowon-gu, Seoul</p>
+            <p class="time">14:00 12/07/2023</p>
+        </div>
+    </section>
+
+	<section class="inform">
+        <h1>오늘은</h1>
+        <h2>이 옷 입어요</h2>
+    </section>
+
+	<script type="text/javascript">
+        document.getElementById('header').addEventListener('click', function() {
+      // 헤더의 애니메이션
+      this.classList.add('expanded');
+      
+      setTimeout(function() {
+        window.location.href = 'index.html'; 
+      }, 1300); 
+    });
+
+
+    </script>
+
+
+</body>
+</html>

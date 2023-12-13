@@ -477,6 +477,7 @@
         <div>
             <p class="location">Nowon-gu, Seoul</p>
             <p class="time">14:00 12/07/2023</p>
+            <p class="celsius">Current Temp °C</p>
         </div>
     </section>
 
@@ -505,6 +506,7 @@
     };
     return `${dms.deg}°${dms.min}'${dms.sec}"${dms.dir}`;
 }
+
 
 const translation_kr = {
 "thunderstorm_with_light_rain":"가벼운 비를 동반한 천둥구름",
@@ -582,6 +584,10 @@ const translation_kr = {
 "violent_storm":"강한 폭풍",
 "hurricane":"허리케인"
 }
+const showTemperature = (temperature) => {
+    const temperatureElement = document.querySelector('.celsius');
+    temperatureElement.innerText = `${temperature}°C`;
+};
 
 const get_weather = async(lat, long) => {
     try{
@@ -591,6 +597,10 @@ const get_weather = async(lat, long) => {
         
         const weather = res.weather[0].main;
         const location = res.name;
+        const temperature = res.main.temp; // 기온을 가져옵니다. 단위는 켈빈(Kelvin)입니다.
+        const celsius = Math.round(temperature - 273.15);
+        
+        showTemperature(celsius);
         
         
         document.querySelector(".location").innerText = location
@@ -653,5 +663,7 @@ getUserLocation();
 
 
     </script>
+         
+
 </body>
 </html>

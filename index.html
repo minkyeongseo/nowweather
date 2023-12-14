@@ -167,6 +167,20 @@
         .picture.background{
         background-color: var(--background);
     }
+    body {
+				overflow: hidden;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.image-container {
+  overflow: hidden;
+}
 
     .picture.background.clear .clear-sun {
     display: block;
@@ -244,6 +258,39 @@
     .picture.background{
         background-color: var(--background);
     }
+
+    [data-weather="rain"] .i {
+    display: block;
+}
+
+.i {
+  position: fixed;
+  height: 200px;
+  background: linear-gradient(transparent, #fff);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  animation: animate 5s linear infinite;
+  z-index: 9998; /* Set a high z-index to ensure rain appears on top */
+}
+
+i:nth-child(3n + 1) {
+  background: linear-gradient(transparent, rgb(153, 175, 181));
+}
+i:nth-child(3n + 2) {
+  background: linear-gradient(transparent, #ffdaea);
+}
+i:nth-child(3n + 3) {
+  background: linear-gradient(transparent,#ff66ac);
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(calc(100vh + 200px));
+  }
+}
 
     html[data-weather=cloudy]
     .picture.background{
@@ -461,9 +508,9 @@
     </section>
 
     <section class="picture background rain">
-        <div>
-        </div>
+    <div class="i"></div>
     </section>
+
 
     <section class="picture background cloudy">
         <div class="clouds">
@@ -513,6 +560,47 @@
         window.location.href = 'index2.html'; 
       }, 1300); 
     });
+    
+    function rain() {
+    let amount = 50;
+    let body = document.querySelector('body');
+    let i = 0;
+
+    if (document.querySelector('html').getAttribute('data-weather') === 'rain') {
+        while (i < amount) {
+            let drop = document.createElement('i');
+            let size = Math.random() * 5;
+            let posX = Math.floor(Math.random() * window.innerWidth);
+            let delay = Math.random() * -18;
+            let duration = Math.random() * 5;
+
+            drop.className = 'i'; // Set class name to 'i' for proper CSS targeting
+            drop.style.width = 0.2 + size + 'px';
+            drop.style.left = posX + 'px';
+            drop.style.animationDelay = delay + 's';
+            drop.style.animationDuration = 1 + duration + 's';
+            body.appendChild(drop);
+            i++;
+        }
+    }
+}
+
+rain(); // Initial call to check weather condition on page load
+
+window.onresize = function () {
+    let drop = document.querySelectorAll('i');
+
+    if (document.querySelector('html').getAttribute('data-weather') !== 'rain') {
+        for (let i = 0; i < drop.length; i++) {
+            drop[i].remove();
+        }
+    } else {
+        rain();
+    }
+}
+
+</script>
+<script>
 
     const ConvertDDToDMS = (D, lng) => {
     //위도, 경도 출력
@@ -665,8 +753,8 @@ const success = ({coords, timestamp}) => {
     get_weather(coords.latitude, coords.longitude);
 
     document.querySelector(".contents .time").innerText = `${hour}:${minute} ${month}/${day}/${year}`
-    document.querySelector(".calendar .month").innerText = month;
-    document.querySelector(".calendar .day").innerText = day;
+    // document.querySelector(".calendar .month").innerText = month;
+    // document.querySelector(".calendar .day").innerText = day;
 }
 
 const getUserLocation = () => {
@@ -770,7 +858,6 @@ getUserLocation();
             })();
             
             </script>
-
 
             </body>
             </html>
